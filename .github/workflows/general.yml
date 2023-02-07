@@ -45,14 +45,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: -- -D warnings
   coverage:
-    name: Code Coverage
+    name: Code coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rs/tarpaulin@v0.1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-      - uses: actions-rs/tarpaulin@v0.1
+      - name: Run cargo-tarpaulin
+        uses: actions-rs/tarpaulin@v0.1
         with:
           args: '--ignore-tests'
