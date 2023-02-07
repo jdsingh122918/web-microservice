@@ -1,0 +1,29 @@
+{
+  "test_case_name": "This is a sample test case name",
+  "test_case_description": "Description of the test case",
+  "config": {
+    "web": {
+      "browser": [
+        {
+          "type": "Chrome",
+          "version": "latest"
+        }
+      ]
+    },
+    "api": {
+      "ignoreSSL": true,
+      "get": {
+        "url": "google.com"
+      }
+    }
+  },
+  "steps": [
+    {
+      "id": "",
+      "action_type": "",
+      "action_input": "",
+      "action_output": "",
+      "action_status": ""
+    }
+  ]
+}
