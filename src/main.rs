@@ -4,8 +4,8 @@ use tracing_bunyan_formatter::{BunyanFormattingLayer, JsonStorageLayer};
 use tracing_log::LogTracer;
 use tracing_subscriber::{EnvFilter, Registry};
 use tracing_subscriber::layer::SubscriberExt;
-
-use web_microservice::run;
+use web_microservice::startup::run;
+use web_microservice::configuration::get_configuration;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -21,6 +21,8 @@ async fn main() -> std::io::Result<()> {
         .with(JsonStorageLayer)
         .with(formatting_layer);
     set_global_default(subscriber).expect("Failed to set subscriber");
-    let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind port");
+    let configuration = get_configuration().expect("Failed to read configuration");
+    let address = format!("{}:{}", configuration.application_host, configuration.application_port);
+    let listener = TcpListener::bind(address).expect("Failed to bind port");
     run(listener)?.await
 }

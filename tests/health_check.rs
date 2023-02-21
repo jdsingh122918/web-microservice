@@ -4,7 +4,7 @@ fn spawn_app() -> String{
     let listener = TcpListener::bind("127.0.0.1:0")
         .expect("Failed to bind port");
     let port = listener.local_addr().unwrap().port();
-    let server = web_microservice::run(listener).expect("Unable to start server");
+    let server = web_microservice::startup::run(listener).expect("Unable to start server");
     let _ = tokio::spawn(server);
     format!("http://127.0.0.1:{}", port)
 }
