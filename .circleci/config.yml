@@ -3,7 +3,7 @@
 version: 2.1
 
 orbs:
-  android: circleci/android@2.0.3
+  android: circleci/android@2.3.0
 
 executors:
   container:
@@ -18,7 +18,9 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   say-hello:
-    executor: android/android-machine
+    executor:
+      name: android/android-machine
+      tag: 2023.07.1
     steps:
       - checkout
       - run:
