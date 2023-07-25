@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  android: circleci/android@2.0.3
+
 executors:
   container:
     docker:
@@ -15,7 +18,7 @@ executors:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   say-hello:
-    executor: container
+    executor: android/android-machine
     steps:
       - checkout
       - run:
@@ -31,10 +34,10 @@ jobs:
 
 
 workflows:
-  say-hello-workflow: # this can be anything
-    jobs:
-      - say-hello
-      - second-job
+#  say-hello-workflow: # this can be anything
+#    jobs:
+#      - say-hello
+#      - second-job
 
   second-workflow:
     jobs:
